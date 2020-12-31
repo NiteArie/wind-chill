@@ -39,6 +39,30 @@ body {
     margin: 10px 0;
 }
 
+.container__form__control__temp {
+    position: relative;
+}
+
+.container__form__control__temp::after {
+    content: attr(unit);
+    position: absolute;
+    top: 5px;
+    right: -20px;
+    font-weight: bold;
+}
+
+.container__form__control__speed {
+    position: relative;
+}
+
+.container__form__control__speed::after {
+    content: attr(unit);
+    position: absolute;
+    top: 5px;
+    right: -40px;
+    font-weight: bold;
+}
+
 .container__form__control__input {
     padding: 8px;
     border: 2px solid hsl(210, 10%, 80%);
