@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wind Chill</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="reset.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="container__title">Windchill Calculator</h1>
+        <p class="container__desc">
+            Windchill combines the actual temperature with the wind speed to calculate the windchill factor, or what the
+            perceived temperature is versus the actual temperature.
+        </p>
+        <form class="container__form">
+            <div class="container__form__control">
+                <label class="container__form__control__label">Temperature</label>
+                <input type="number" class="container__form__control__input">
+            </div>
+            <div class="container__form__control">
+                <label class="container__form__control__label">Speed</label>
+                <input type="number" class="container__form__control__input">
+            </div>
+            <div class="container__form__control">
+                <label class="container__form__control__label">Imperial</label>
+                <label class="container__form__control__switch">
+                    <input type="checkbox" class="container__form__control__switch__checkbox">
+                    <span class="container__form__control__switch__slider"></span>
+                </label>
+                <label class="container__form__control__label">Metric</label>
+            </div>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
