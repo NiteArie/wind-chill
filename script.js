@@ -2,7 +2,10 @@ const app = (() => {
     const _unitSlider = document.querySelector(".container__form__control__switch__checkbox");
     const _temperatureLabel = document.querySelector(".container__form__control__temp");
     const _speedLabel = document.querySelector(".container__form__control__speed");
+    const _temperatureInput = document.querySelector(".container__form__control__temp-input");
+    const _speedInput = document.querySelector(".container__form__control__speed-input");
     const _form = document.querySelector(".container__form");
+    const _formAlert = document.querySelector(".container__form__alert");
 
     let _imperialState = true;
     let _temp = null;
@@ -22,7 +25,27 @@ const app = (() => {
     _form.addEventListener("submit", (event) => {
         event.preventDefault();
 
-        if (_imperialState) {
+        let _tempValue = _temperatureInput.value;
+        let _speedValue = _speedInput.value;
+
+        console.log(_tempValue);
+        console.log(_speedValue);
+
+        if (_tempValue && _speedValue) {
+            _temp = _tempValue;
+            _windSpeed = _speedValue;
+        } else {
+            updateFormAlertContent("Temperature and wind speed can not be blank. Please enter their values.");
+            displayFormAlert();
+            return;
+        }
+
+        hideFormAlert();    
+
+        if (
+            !(_temp === null) &&
+            !(_windSpeed === null) &&
+            _imperialState) {
             console.log(calculateWindChillByImperial());
         } else {
             console.log(calculateWindChillByMetric());
@@ -51,6 +74,18 @@ const app = (() => {
         return (
             35.74 + 0.6215 * _temp - 35.75 * Math.pow(_windSpeed, 0.16) + 0.4275 * _temp * Math.pow(_windSpeed, 0.16)
         )
+    }
+
+    function displayFormAlert() {
+        _formAlert.classList.remove("hidden");
+    }
+
+    function hideFormAlert() {
+        _formAlert.classList.add("hidden");
+    }
+
+    function updateFormAlertContent(content) {
+        _formAlert.textContent = content;
     }
 
 })();

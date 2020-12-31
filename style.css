@@ -32,6 +32,10 @@ body {
     padding: 10px 20px;
 }
 
+.container__form__alert {
+    color: hsl(0, 50%, 50%);
+}
+
 .container__form__control {
     display: flex;
     justify-content: space-between;
