@@ -46,11 +46,20 @@ const app = (() => {
             !(_temp === null) &&
             !(_windSpeed === null) &&
             _imperialState) {
-            console.log(calculateWindChillByImperial());
+            let _result = calculateWindChillByImperial();
+            validWinChillProcess(_result);
         } else {
-            console.log(calculateWindChillByMetric());
+            let _result = calculateWindChillByMetric();
+            validWinChillProcess(_result);
         }
     })
+
+    function validWinChillProcess(_result) {
+        if (!checkValidWinChill(_result)) {
+            updateFormAlertContent("There was an error during the calculation process. Please try again");
+            displayFormAlert();
+        }
+    }
 
     function updateTempureLabelUnit(value) {
         _temperatureLabel.setAttribute("unit", `${String.fromCharCode(176)}${value}`);
@@ -86,6 +95,10 @@ const app = (() => {
 
     function updateFormAlertContent(content) {
         _formAlert.textContent = content;
+    }
+
+    function checkValidWinChill(windChill) {
+        return windChill < _temp;
     }
 
 })();
