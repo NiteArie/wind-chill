@@ -22,14 +22,76 @@ const app = (() => {
         }
     })
 
+    _temperatureInput.addEventListener("input", (event) => {
+
+        let _tempValue = _temperatureInput.value;
+        let _speedValue = _speedInput.value;
+
+        if (_tempValue && _speedValue) {
+            _temp = _tempValue;
+            _windSpeed = _speedValue;
+        } else {
+            updateFormAlertContent("Temperature and wind speed can not be blank. Please enter their values.");
+            displayFormAlert();
+            return;
+        }
+
+        hideFormAlert();    
+
+        if (
+            !(_temp === null) &&
+            !(_windSpeed === null) &&
+            _imperialState) {
+
+            let _result = calculateWindChillByImperial();
+            validWinChillProcess(_result);
+        } else if (
+            !(_temp === null) &&
+            !(_windSpeed === null) &&
+            !_imperialState) {
+
+            let _result = calculateWindChillByMetric();
+            validWinChillProcess(_result);
+        }
+    })
+
+    _speedInput.addEventListener("input", (event) => {
+        let _tempValue = _temperatureInput.value;
+        let _speedValue = _speedInput.value;
+
+        if (_tempValue && _speedValue) {
+            _temp = _tempValue;
+            _windSpeed = _speedValue;
+        } else {
+            updateFormAlertContent("Temperature and wind speed can not be blank. Please enter their values.");
+            displayFormAlert();
+            return;
+        }
+
+        console.log(_tempValue, _speedValue);
+
+        hideFormAlert();    
+
+        if (
+            !(_temp === null) &&
+            !(_windSpeed === null) &&
+            _imperialState) {
+            let _result = calculateWindChillByImperial();
+            validWinChillProcess(_result);
+        } else if (
+            !(_temp === null) &&
+            !(_windSpeed === null) &&
+            !_imperialState) {
+            let _result = calculateWindChillByMetric();
+            validWinChillProcess(_result);
+        }
+    })
+
     _form.addEventListener("submit", (event) => {
         event.preventDefault();
 
         let _tempValue = _temperatureInput.value;
         let _speedValue = _speedInput.value;
-
-        console.log(_tempValue);
-        console.log(_speedValue);
 
         if (_tempValue && _speedValue) {
             _temp = _tempValue;
