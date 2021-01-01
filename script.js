@@ -6,6 +6,8 @@ const app = (() => {
     const _speedInput = document.querySelector(".container__form__control__speed-input");
     const _form = document.querySelector(".container__form");
     const _formAlert = document.querySelector(".container__form__alert");
+    const _outputWrapper = document.querySelector(".output-wrapper");
+    const _outputDisplay = document.querySelector(".output__result");
 
     let _imperialState = true;
     let _temp = null;
@@ -24,6 +26,8 @@ const app = (() => {
 
     _temperatureInput.addEventListener("input", (event) => {
 
+        hideOutputWrapper();
+
         let _tempValue = _temperatureInput.value;
         let _speedValue = _speedInput.value;
 
@@ -44,18 +48,27 @@ const app = (() => {
             _imperialState) {
 
             let _result = calculateWindChillByImperial();
-            validWinChillProcess(_result);
+            if (validWinChillProcess(_result)) {
+                showOutputWrapper();
+                renderOutputResult(_result);
+            }
         } else if (
             !(_temp === null) &&
             !(_windSpeed === null) &&
             !_imperialState) {
 
             let _result = calculateWindChillByMetric();
-            validWinChillProcess(_result);
+            if (validWinChillProcess(_result)) {
+                showOutputWrapper();
+                renderOutputResult(_result);
+            }
         }
     })
 
     _speedInput.addEventListener("input", (event) => {
+
+        hideOutputWrapper();
+
         let _tempValue = _temperatureInput.value;
         let _speedValue = _speedInput.value;
 
@@ -68,8 +81,6 @@ const app = (() => {
             return;
         }
 
-        console.log(_tempValue, _speedValue);
-
         hideFormAlert();    
 
         if (
@@ -77,13 +88,19 @@ const app = (() => {
             !(_windSpeed === null) &&
             _imperialState) {
             let _result = calculateWindChillByImperial();
-            validWinChillProcess(_result);
+            if (validWinChillProcess(_result)) {
+                showOutputWrapper();
+                renderOutputResult(_result);
+            }
         } else if (
             !(_temp === null) &&
             !(_windSpeed === null) &&
             !_imperialState) {
             let _result = calculateWindChillByMetric();
-            validWinChillProcess(_result);
+            if (validWinChillProcess(_result)) {
+                showOutputWrapper();
+                renderOutputResult(_result);
+            }
         }
     })
 
@@ -120,7 +137,9 @@ const app = (() => {
         if (!checkValidWinChill(_result)) {
             updateFormAlertContent("There was an error during the calculation process. Please try again");
             displayFormAlert();
+            return false;
         }
+        return true;
     }
 
     function updateTempureLabelUnit(value) {
@@ -162,5 +181,18 @@ const app = (() => {
     function checkValidWinChill(windChill) {
         return windChill < _temp;
     }
+
+    function showOutputWrapper() {
+        _outputWrapper.classList.remove("hidden");
+    }
+
+    function hideOutputWrapper() {
+        _outputWrapper.classList.add("hidden");
+    }
+
+    function renderOutputResult(result) {
+        _outputDisplay.textContent = String(result).slice(0, 6);
+    }
+
 
 })();
